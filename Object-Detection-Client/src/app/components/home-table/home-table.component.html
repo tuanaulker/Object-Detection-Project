@@ -1,0 +1,105 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="card">
+    <p-table #dt2 [value]="logs" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [globalFilterFields]="['eventType', 'capturedTime', 'location', 'confidence', 'safezone', 'actionStatus']"
+      [tableStyle]="{ 'min-width': '75rem' }">
+      <!-- search keyword part -->
+
+      <ng-template pTemplate="caption">
+        <div class="flex" style="margin-top: 5px;">
+          <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText #searchInput type="text" (input)="filterGlobal(searchInput.value)"
+              placeholder="Search keyword" />
+          </span>
+          <div class="dropdown-container">
+            <p-dropdown [options]="areas" [(ngModel)]="selectedArea" (ngModelChange)="filterLogsByArea()" [showClear]="true" placeholder="Select an Area"></p-dropdown>
+          </div>
+        </div>
+      </ng-template>
+
+
+      <!-- it makes bigger search bar
+        <ng-template pTemplate="caption">
+  <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+      <i class="pi pi-search"></i>
+    </span>
+    <input pInputText #searchInput type="text" (input)="filterGlobal(searchInput.value)" placeholder="Search keyword" class="p-inputtext" />
+  </div>
+</ng-template>
+ -->
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:20%">Event Type</th>
+          <th style="width:20%">Time</th>
+          <th style="width:15%">Location</th>
+          <th style="width:15%">Confidence</th>
+          <th style="width:15%">Safezone</th>
+          <th style="width:15%">Status</th>
+        </tr>
+        <tr>
+          <th>
+            <p-columnFilter type="text" field="eventType"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="date" field="capturedTime" filterMode="date"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="location"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="confidence"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="numeric" field="safezone"></p-columnFilter>
+          </th>
+          <th>
+            <!-- <p-columnFilter type="text" field="actionStatus"></p-columnFilter> -->
+            <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-dropdown [ngModel]="value" [options]="statuses" (onChange)="filterStatus($event.value)"
+                  placeholder="Any" [showClear]="true">
+                  <ng-template let-option pTemplate="item">
+                    <p-tag [value]="option.value" [severity]="getSeverityStatus(option.value)"></p-tag>
+                  </ng-template>
+                </p-dropdown>
+              </ng-template>
+            </p-columnFilter>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-log>
+        <tr [ngClass]="getActionStatusRowColor(log)" (click)="getLogById(log.id)">
+          <td>
+            {{ log.eventType }}
+          </td>
+          <td>
+            {{ log.capturedTime | date: 'dd/MM/yyyy HH:mm:ss'}}
+          </td>
+          <td>
+            {{ log.location }}
+          </td>
+          <td>
+            {{ log.confidence }}%
+          </td>
+          <td>
+            {{ log.safezone }}
+          </td>
+          <td>
+            <span [ngClass]="getActionStatusIcon(log.actionStatus)"> {{ log.actionStatus }}</span>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6">No log record found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="card flex flex-column align-center ">
+    <div class="profile-image-container">
+        <img [src]="newUser.profileUrl ? profile : 'assets/images/tempUserProfile.PNG'" class="profile-image"
+            alt="User Profile Image">
+    </div>
+    <div class="input-group-container">
+        <div class="input-group">
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-user"></i>
+                </p-inputGroupAddon>
+                <input pInputText placeholder="Name" [(ngModel)]="newUser.name" (ngModelChange)="generateUsername()" />
+            </p-inputGroup>
+        </div>
+        <div class="input-group">
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-user"></i>
+                </p-inputGroupAddon>
+                <input pInputText placeholder="Surname" [(ngModel)]="newUser.surname"  (ngModelChange)="generateUsername()"/>
+            </p-inputGroup>
+        </div>
+    </div>
+    <p-inputGroup>
+        <p-inputGroupAddon>
+            <i class="pi pi-user"></i>
+        </p-inputGroupAddon>
+        <input pInputText placeholder="Username" [(ngModel)]="newUser.username" />
+    </p-inputGroup>
+    <p-inputGroup>
+        <p-inputGroupAddon>
+            <i class="pi pi-envelope"></i>
+        </p-inputGroupAddon>
+        <input pInputText type="email" placeholder="Email" [(ngModel)]="newUser.email" />
+    </p-inputGroup>
+    <p-inputGroup>
+        <p-inputGroupAddon>
+            <i class="pi pi-lock"></i>
+        </p-inputGroupAddon>
+        <input pInputText type="password" placeholder="Password" [(ngModel)]="newUser.password" />
+    </p-inputGroup>
+    <p-inputGroup>
+        <p-inputGroupAddon>
+            <i class="pi pi-image"></i>
+        </p-inputGroupAddon>
+        <input pInputText placeholder="Profile Image" [(ngModel)]="profile" (change)="profileAdded()" />
+    </p-inputGroup>
+
+    <div class="radiobuttons">
+        <div *ngFor="let role of roles" class="field-checkbox">
+            <p-radioButton name="role" [value]="role" [(ngModel)]="newUser.role" />
+            <label class="ml-2">
+                {{ role }}
+            </label>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <p-button label="Add User" icon="pi pi-check" iconPos="right" (click)="addUser()"></p-button>
+    </div>
+</div>

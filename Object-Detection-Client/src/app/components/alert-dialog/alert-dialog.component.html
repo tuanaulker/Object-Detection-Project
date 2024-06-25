@@ -1,0 +1,75 @@
+<div class="container">
+    <div style="display: flex;">
+        <div
+            style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; padding: 10px;">
+            <img [src]="alert?.capturedImage" style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                alt="Captured Image">
+        </div>
+
+        <div style="flex: 1; padding: 10px;">
+            <p-table [value]="[alert]" class="center-table">
+                <ng-template pTemplate="body" let-alert>
+                    <tr>
+                        <td class="info-label">Event Type:</td>
+                        <td>{{ alert.eventType }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Captured Time:</td>
+                        <td>{{ alert.capturedTime | date: 'medium' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Area & Location:</td>
+                        <td>{{ alert.areas }} - {{ alert.location }}</td>
+                      </tr>
+                    <tr>
+                    <tr>
+                        <td class="info-label">Confidence:</td>
+                        <td>{{ alert.confidence }}%</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Safezone:</td>
+                        <td>{{ alert.safezone }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <br>
+            <div class="info-row">
+                <label class="info-label">Action Status:</label>
+                <div class="status-options">
+                    <div class="status-option" style="background-color: #FF6145;"
+                        [ngClass]="{'selected': alert.actionStatus === 'Alert'}"
+                        (click)="alert.actionStatus = 'Alert'; stopAudio()">
+                        Alert
+                    </div>
+                    <div class="status-option" style="background-color: #FFBE45;"
+                        [ngClass]="{'selected': alert.actionStatus === 'Progress'}"
+                        (click)="alert.actionStatus = 'Progress'; stopAudio()">
+                        Progress
+                    </div>
+                    <div class="status-option" style="background-color: #9CFF45;"
+                        [ngClass]="{'selected': alert.actionStatus === 'Stable'}"
+                        (click)="alert.actionStatus = 'Stable'; stopAudio()">
+                        Stable
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="info-row" *ngIf="alert.actionStatus == 'Stable'">
+                <label class="info-label">Details:</label>
+                <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                <textarea pInputTextarea [(ngModel)]="alert.details" rows="3"></textarea>
+            </div>
+
+            
+
+        </div>
+
+    </div>
+</div>
+<br>
+<div>
+    <div style="text-align: center;">
+        <button pButton type="button" label="Update" (click)="update()" style="margin-right: 15px;"></button>
+    </div>
+</div>

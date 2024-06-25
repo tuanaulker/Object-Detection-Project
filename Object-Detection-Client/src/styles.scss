@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+.p-menubar {
+    border: none;
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+}  
+
+.p-menubar.p-component{
+    //background-color: #385170;
+    background-color:#455d7a;
+    color: white;
+    width: 100%
+}
+
+     
+a.p-menubar-button{
+    order: 3;
+}
+
+p-menubarsub.p-element {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+span.p-menuitem-text {color: rgb(87, 62, 62);}
+span.p-menuitem-icon.pi.pi-fw {
+  color: rgb(167, 57, 57);
+}
+
+a.p-menubar-button {
+    color: white;
+}
+
+span.p-menuitem-text {
+    color: white;
+}
+
+
+.p-menubar-mobile-active .p-menubar-root-list {
+    background-color: #455d7a !important;
+}
+
+
+.navbar .pi {
+    color: white !important;
+    font-size: 24px;
+}
+
+.p-submenu-list{
+    background-color:#455d7a;
+}
+
+a.p-ripple.p-element.p-menuitem-link.ng-star-inserted {
+    background-color: #455d7a;
+}
+
+.p-menuitem .p-submenu-list {/* initially hide the submenu */
+    display: none;
+}
+
+.p-menuitem:hover .p-submenu-list {/* show the submenu when the menu item is hovered */
+    display: block;
+}
+
+.p-menuitem:active .p-submenu-list {/* show the submenu when the menu item is hovered */
+    display: block;
+}
+.submenunavbar .pi {
+    font-size: 15px;
+}
+
+.item-list .pi-exclamation-triangle {
+    color: red !important;
+}
+
+.p-menubar-root-list .p-menuitem-active p-menubarsub  .p-submenu-list {
+    display: block;
+    max-height: 50vh; 
+    overflow-y: auto;
+}
+
+.p-menubar-root-list .p-menuitem-active p-menubarsub .p-submenu-list .p-menuitem {
+    overflow: visible !important;
+}
+
+.p-menubar-root-list .p-menuitem:hover .p-submenu-list {
+    display: block;
+    max-height: 50vh; 
+    overflow-y: auto;
+}
+
+.p-menubar-root-list .p-menuitem-active .p-submenu-list {
+    display: block;
+    max-height: 50vh; 
+    overflow-y: auto;
+}
+
+
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group .p-button.p-inputnumber-button {
+    display: none;
+}
+

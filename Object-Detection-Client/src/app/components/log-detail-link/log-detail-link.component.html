@@ -1,0 +1,82 @@
+<app-navbar></app-navbar>
+<div class="detail-log-link">
+  <div style="display: flex; align-items: flex-start;">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; padding: 10px;">
+      <img [src]="log?.capturedImage" style="max-width: calc(100vw - 20vw); max-height: calc(100vh - 20vw); object-fit: contain;" alt="Captured Image">
+    </div>
+    
+      
+    <div style="flex: 1;">
+      <p-table [value]="[log]" class="center-table">
+          <ng-template pTemplate="body" let-log>
+              <tr>
+                  <td class="info-label">Event Type:</td>
+                  <td>{{ log.eventType }}</td>
+              </tr>
+              <tr>
+                  <td class="info-label">Captured Time:</td>
+                  <td>{{ log.capturedTime | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+              </tr>
+              <tr>
+                  <td class="info-label">Area & Location:</td>
+                  <td>{{ log.areas }} - {{ log.location }}</td>
+                </tr>
+              <tr>
+                  <td class="info-label">Confidence:</td>
+                  <td>{{ log.confidence }}%</td>
+              </tr>
+              <tr>
+                  <td class="info-label">Safezone:</td>
+                  <td>{{ log.safezone }}</td>
+              </tr>
+              <tr *ngIf="log.userId != null">
+                <td class="info-label">User & Action Time: </td>
+                <td>{{ log.userId | user : userList }}  &nbsp;  -  &nbsp; {{ log.actionTime | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+            </tr>
+          </ng-template>
+      </p-table>
+      <br>
+      <div class="info-row" >
+          <label class="info-label">Action Status:</label>
+          <div class="status-options">
+            <div class="status-option" style="background-color: #FF6145;" *ngIf="log" [ngClass]="{'selected': log.actionStatus === 'Alert'}" (click)="log.actionStatus = 'Alert'">
+                  Alert
+              </div>
+              <div class="status-option" style="background-color: #FFBE45;" *ngIf="log"  [ngClass]="{'selected': log.actionStatus === 'Progress'}" (click)="log.actionStatus = 'Progress'">
+                  Progress
+              </div>
+              <div class="status-option" style="background-color: #9CFF45;" *ngIf="log"  [ngClass]="{'selected': log.actionStatus === 'Stable'}" (click)="log.actionStatus = 'Stable'">
+                  Stable
+              </div>
+          </div>
+      </div>
+      <!-- <div class="info-row">
+        <label class="info-label" style="margin-right: 0px;">Action Taken:</label>
+        <br>
+        <textarea [(ngModel)]="log.actionTaken" rows="3" class="custom-textarea" [disabled]="log.actionStatus == 'Alert'"></textarea>
+      </div> 
+
+      <div class="info-row" >
+        <label class="info-label">Details:</label>
+        <br>&nbsp;
+        <textarea pInputTextarea [(ngModel)]="log.details" rows="3" class="custom-textarea" [disabled]="log.actionStatus == 'Alert'"></textarea>
+      </div> -->
+      <div class="info-row">
+        <label class="info-label" style="min-width: 120px;">Action Taken:</label>
+        <div style="flex-grow: 1;">
+          <textarea *ngIf="log" [(ngModel)]="log.actionTaken" rows="3" class="custom-textarea" [disabled]="log.actionStatus == 'Alert'"></textarea>
+        </div>
+      </div>
+      
+      <div class="info-row">
+        <label class="info-label" style="min-width: 120px;">Details:</label>
+        <div style="flex-grow: 1;">
+          <textarea pInputTextarea *ngIf="log" [(ngModel)]="log.details" rows="3" class="custom-textarea" [disabled]="log.actionStatus == 'Alert'" [ngStyle]="{'border-color': (log.actionStatus === 'Stable' && !log.details) ? 'red' : ''}"></textarea>
+        </div>
+      </div>
+  </div>  
+</div>
+      
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+  <button pButton type="button" label="Update" (click)="update()"></button>
+</div>

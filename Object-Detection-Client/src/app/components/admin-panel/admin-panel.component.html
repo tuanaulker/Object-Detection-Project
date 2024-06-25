@@ -1,0 +1,123 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="card">
+    <p-table [value]="filteredUsers" dataKey="id" editMode="row" [rows]="5" [showCurrentPageReport]="true" [loading]="loading"
+      [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="caption">
+        <div class="flex search-bar-button">
+          <div class="user-management">User Management</div>
+          <span class="p-input-icon-right">
+            <i class="pi pi-search"></i>
+            <input pInputText #searchInput type="text" placeholder="Search user" (input)="searchUsers(searchInput.value)" />
+          </span>
+          <span class="add-user">
+            <p-button label="Add User" icon="pi pi-user-plus" [outlined]="true" severity="warning"
+              (click)="addUser()" />
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:15%"></th>
+          <th style="width:15%">Username</th>
+          <th style="width:15%">Name</th>
+          <th style="width:15%">Surname</th>
+          <th style="width:20%">Email</th>
+          <th style="width:10%">Role</th>
+          <th style="width:10%"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="user">
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" placeholder="Enter Image" [(ngModel)]="user.profileUrl"
+                  class="input-small" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                <div class="profile-image-container">
+                  <img [src]="user.profileUrl" class="profile-image" alt="User Profile Image">
+                </div>
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="user.username" class="input-small" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{user.username}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="user.name" required class="input-small" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{user.name}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="user.surname" required class="input-small" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{user.surname}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="user.email" required />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{user.email}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <p-dropdown [options]="statuses" appendTo="body" [(ngModel)]="user.role" [style]="{'width':'100%'}" />
+              </ng-template>
+              <ng-template pTemplate="output">
+                <p-tag [value]="user.role | userRole" [severity]="getSeverity(user.role)" />
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <div class="flex align-items-center justify-content-center gap-2">
+              <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+                (click)="onRowEditInit(user)" class="p-button-rounded p-button-text">
+              </button>
+              <button *ngIf="!editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-trash"
+                (click)="delete(user.id)" class="p-button-rounded p-button-text p-button-danger">
+              </button>
+              <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+                (click)="onRowEditSave(user)" class="p-button-rounded p-button-text p-button-success mr-2">
+              </button>
+              <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+                (click)="onRowEditCancel(user, ri)" class="p-button-rounded p-button-text p-button-danger">
+              </button>
+
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6">No user record found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

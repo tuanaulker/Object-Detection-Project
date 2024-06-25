@@ -1,0 +1,58 @@
+.info-row {
+    display: flex;
+    align-items: center;
+}
+
+.info-label {
+    margin-right: 10px;
+}
+
+.status-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.status-option {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.status-option.selected {
+    background-color: #ccc;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #45C1FF;
+}
+
+.status-option:hover {
+    background-color: #f0f0f0;
+}
+
+
+// .container{
+//     border: 3px solid red;
+// }
+
+
+.container {
+    border: 15px solid transparent; 
+    animation: pulsate 0.5s infinite alternate;
+  }
+  
+  @keyframes pulsate {
+    0% {
+      border-color: transparent; 
+    }
+    100% {
+      border-color: red; 
+    }
+  }
+
+  textarea{
+    resize: none;
+    width: 100%;
+  }

@@ -1,0 +1,19 @@
+<div class="card navbar">
+    <p-menubar class="item-list" [model]="items">
+        <ng-template pTemplate="start">
+            <div class="start-content">
+                <span class="logo">
+                    <a href="/">
+                        <img src="..\assets\images\logo.PNG">
+                    </a>
+                </span>
+                &nbsp;
+                <span>
+                    <a href="/" style="text-decoration: none; color: inherit; font-size: x-large">VisionAI</a>
+                </span>
+            </div>
+        </ng-template>
+        <!-- <i class="pi pi-bell" pBadge value="2"></i> -->
+    </p-menubar>
+    <button *ngIf="alerts.length != 0 " class="alert-button" (click)="clickedAlertButton()">ALERT&nbsp;&nbsp;<i class="pi pi-megaphone"></i></button>
+</div>

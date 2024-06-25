@@ -1,0 +1,105 @@
+.card {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+
+  .item-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .p-menubar-root-list {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .p-menuitem {
+        margin-left: 20px; 
+      }
+    }
+  }
+
+  p-menubar {
+    color: rgb(7, 9, 122);
+    height: 64px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    border-radius: 0;
+
+    .start-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo{
+      margin-right: 10px;
+      margin-left: 15px;
+    }
+
+    img {
+      width: 50px; 
+      height: auto; 
+    }
+
+    button {
+      background: none;
+      border: none;
+      margin-right: 10px;
+    }
+  }
+}
+
+
+
+.submenunavbar{
+  padding: 10px;
+    border-bottom: 1px solid #ccc; 
+    white-space: nowrap;
+    max-height: 300px; 
+    overflow-y: auto;
+}
+
+.navbar {
+  position: relative;
+}
+
+@keyframes alert-pulse {
+  0% {
+    background-color: white;
+  }
+  50% {
+    background-color: red; 
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+.alert-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  animation: alert-pulse 1.0s infinite; 
+}
+
+
